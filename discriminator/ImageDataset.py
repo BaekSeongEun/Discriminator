@@ -5,7 +5,7 @@ from PIL import Image
 class ImageDataset(Dataset):
     def __init__(self, image_folder, transform, label):
         self.image_paths = [os.path.join(image_folder, f"{i}.jpg") for i in range(1, 21)]  # 1부터 20까지의 이미지 경로
-        self.labels = [label for _ in range(20)]  # 모든 이미지에 대한 레이블
+        self.labels = [label for _ in range(20)]  
         self.transform = transform
 
     def __len__(self):

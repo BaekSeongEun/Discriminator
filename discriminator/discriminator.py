@@ -8,7 +8,6 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
         
         self.model = nn.Sequential(
-            # Assuming input images are 256x256 RGB images
             nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1),
             nn.LeakyReLU(0.2, inplace=True),
 
@@ -24,7 +23,6 @@ class Discriminator(nn.Module):
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
 
-            # Flatten and apply sigmoid at the end to classify
             nn.Flatten(),
             nn.Linear(512 * 16 * 16, 1),
             nn.Sigmoid()
@@ -37,8 +35,9 @@ class Discriminator(nn.Module):
 def load_image(image_path):
     transform = transforms.Compose([
     transforms.Resize((256, 256)),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    transforms.ToTensor()
+    # transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
 
     image = Image.open(image_path).convert('RGB')
     return transform(image)
